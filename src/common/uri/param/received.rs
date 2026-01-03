@@ -3,7 +3,7 @@ use std::net::IpAddr;
 
 /// Simple NewType around String. Intended to be used for the `received` parameter found in the `Via`
 /// header.
-#[derive(NewType, IntoParam, Debug, PartialEq, Eq, Clone)]
+#[derive(NewType, IntoParam, Debug, PartialEq, Eq, Clone, Hash)]
 pub struct Received(String);
 
 impl Received {

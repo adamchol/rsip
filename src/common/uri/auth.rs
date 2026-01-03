@@ -3,7 +3,7 @@ pub use crate::Error;
 pub use tokenizer::Tokenizer;
 
 /// Simple struct that holds the authority part on of a URI.
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Hash)]
 pub struct Auth {
     pub user: String,
     pub password: Option<String>,

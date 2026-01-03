@@ -24,7 +24,7 @@ use std::convert::{TryFrom, TryInto};
 /// is specified then port 5060 is assumed. But rsip is not acting smart here and delegates that
 /// responsibility to you because you might want 5061 (TLS) as default etc.
 /// Similarly on generation, if no port is specified, no port is set at all in the final string.
-#[derive(Debug, PartialEq, Eq, Clone, Default)]
+#[derive(Debug, PartialEq, Eq, Clone, Default, Hash)]
 pub struct Uri {
     pub scheme: Option<Scheme>,
     pub auth: Option<Auth>,

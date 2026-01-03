@@ -29,7 +29,7 @@ use std::convert::TryInto;
 /// in a `Contact` header, however we have it in the same enum for simplicity for now and delegate
 /// this safety to the user.
 //TODO: move out Via/From/etc params from here, but keep the same tokenizer
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Hash)]
 pub enum Param {
     Transport(Transport),
     User(User),
@@ -45,9 +45,9 @@ pub enum Param {
     Other(OtherParam, Option<OtherParamValue>),
 }
 
-#[derive(NewType, Debug, PartialEq, Eq, Clone)]
+#[derive(NewType, Debug, PartialEq, Eq, Clone, Hash)]
 pub struct OtherParam(String);
-#[derive(NewType, Debug, PartialEq, Eq, Clone)]
+#[derive(NewType, Debug, PartialEq, Eq, Clone, Hash)]
 pub struct OtherParamValue(String);
 
 impl std::fmt::Display for Param {

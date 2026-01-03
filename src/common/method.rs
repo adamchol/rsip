@@ -8,7 +8,7 @@ macro_rules! create_methods {
     ($($name:ident),*) => {
 
         /// The SIP [Request](super::super::Request) method.
-        #[derive(Debug, PartialEq, Eq, Clone, Copy)]
+        #[derive(Debug, PartialEq, Eq, Clone, Copy, Hash)]
         pub enum Method {
             $(
                 $name,

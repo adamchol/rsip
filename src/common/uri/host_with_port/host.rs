@@ -10,7 +10,7 @@ use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 ///
 /// * `Domain` that holds a [Domain] that represents a DNS domain.
 /// * `IpAddr` that holds an [IpAddr](std::net::IpAddr) and represents a raw IP address
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Hash)]
 pub enum Host {
     Domain(Domain),
     IpAddr(IpAddr),

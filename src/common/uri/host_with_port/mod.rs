@@ -17,7 +17,7 @@ use std::net::{IpAddr, SocketAddr};
 /// responsibility to you because you might want 5061 (TLS) as default etc.
 ///
 /// Similarly on generation, if no port is specified, no port is set at all in the final string.
-#[derive(Debug, PartialEq, Eq, Clone, Default)]
+#[derive(Debug, PartialEq, Eq, Clone, Default, Hash)]
 pub struct HostWithPort {
     pub host: Host,
     pub port: Option<Port>,

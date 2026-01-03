@@ -5,7 +5,7 @@ use crate::Error;
 
 /// Simple enum that holds the scheme part of a URIs. This type is not a `Copy` type because
 /// it can hold any `Contact` URI, like `mailto` etc.
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Hash)]
 pub enum Scheme {
     Sip,
     Sips,
