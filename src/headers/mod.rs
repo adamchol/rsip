@@ -16,8 +16,10 @@ impl Headers {
     }
 
     pub fn unique_push(&mut self, h: Header) {
-        self.0
-            .retain(|s| std::mem::discriminant(s) != std::mem::discriminant(&h));
+        self.0.retain(|s| match (&h, s) {
+            (Header::Other(k1, _), Header::Other(k2, _)) => k1 != k2,
+            (s, h) => std::mem::discriminant(s) != std::mem::discriminant(h),
+        });
         self.push(h);
     }
 
