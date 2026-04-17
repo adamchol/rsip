@@ -29,6 +29,53 @@ pub mod www_authenticate;
 
 use rsip::headers::{header::Tokenizer, Accept, Header};
 
+mod name_and_value {
+    use rsip::headers::*;
+    use rsip::Header;
+
+    #[test]
+    fn single_word_header() {
+        let header = Header::Via(Via::new("SIP/2.0/UDP 192.168.1.1"));
+        assert_eq!(header.name(), "Via");
+        assert_eq!(header.value(), "SIP/2.0/UDP 192.168.1.1");
+    }
+
+    #[test]
+    fn multi_word_header() {
+        let header = Header::ContentLength(ContentLength::new("349"));
+        assert_eq!(header.name(), "Content-Length");
+        assert_eq!(header.value(), "349");
+    }
+
+    #[test]
+    fn explicit_display_name_call_id() {
+        let header = Header::CallId(CallId::new("abc@example.com"));
+        assert_eq!(header.name(), "Call-ID");
+        assert_eq!(header.value(), "abc@example.com");
+    }
+
+    #[test]
+    fn explicit_display_name_cseq() {
+        let header = Header::CSeq(CSeq::new("1 INVITE"));
+        assert_eq!(header.name(), "CSeq");
+        assert_eq!(header.value(), "1 INVITE");
+    }
+
+    #[test]
+    fn explicit_display_name_www_authenticate() {
+        let header = Header::WwwAuthenticate(WwwAuthenticate::new("Digest realm=\"example.com\""));
+        assert_eq!(header.name(), "WWW-Authenticate");
+        assert_eq!(header.value(), "Digest realm=\"example.com\"");
+    }
+
+    #[test]
+    fn other_variant() {
+        let header = Header::Other("X-Custom".into(), "some-value".into());
+        assert_eq!(header.name(), "X-Custom");
+        assert_eq!(header.value(), "some-value");
+    }
+}
+
 mod display {
     use super::*;
 

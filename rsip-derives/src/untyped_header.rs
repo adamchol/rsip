@@ -1,10 +1,26 @@
 use quote::quote;
 
-pub fn trait_methods(struct_name: &syn::Ident) -> proc_macro2::TokenStream {
+fn header_name(struct_name: &syn::Ident, display_name: Option<String>) -> String {
+    match display_name {
+        Some(name) => name,
+        None => crate::kebab_case(struct_name.to_string()),
+    }
+}
+
+pub fn trait_methods(
+    struct_name: &syn::Ident,
+    display_name: Option<String>,
+) -> proc_macro2::TokenStream {
+    let name = header_name(struct_name, display_name);
+
     quote! {
         impl<'a> crate::headers::untyped::UntypedHeader<'a> for #struct_name {
             fn new(value: impl std::convert::Into<String>) -> Self {
                 Self(value.into())
+            }
+
+            fn name(&self) -> &'static str {
+                #name
             }
 
             fn value(&self) -> &str {
@@ -20,10 +36,7 @@ pub fn trait_methods(struct_name: &syn::Ident) -> proc_macro2::TokenStream {
 
 //TODO: are we sure that we want here the {}: {} ? Maybe Header should do that
 pub fn display(struct_name: &syn::Ident, display_name: Option<String>) -> proc_macro2::TokenStream {
-    let name = match display_name {
-        Some(display_name) => display_name,
-        None => crate::kebab_case(struct_name.to_string()),
-    };
+    let name = header_name(struct_name, display_name);
 
     quote! {
         impl std::fmt::Display for #struct_name {

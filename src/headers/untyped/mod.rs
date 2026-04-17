@@ -117,6 +117,7 @@ pub trait UntypedHeader<'a>:
     + std::convert::Into<Header>
 {
     fn new(value: impl Into<String>) -> Self;
+    fn name(&self) -> &'static str;
     fn value(&self) -> &str;
     fn replace(&mut self, new_value: impl Into<String>);
 }

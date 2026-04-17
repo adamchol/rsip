@@ -26,7 +26,7 @@ pub fn untyped_header_signature(item: TokenStream) -> TokenStream {
     //let field_type = field_type(ast.data);
     //let field_name = field_type_name(field_type.clone());
 
-    let untyped_methods = untyped_header::trait_methods(struct_name);
+    let untyped_methods = untyped_header::trait_methods(struct_name, opts.display_name.clone());
     let display = untyped_header::display(struct_name, opts.display_name);
     let into_header = untyped_header::into_header(struct_name);
     let from_into_string = untyped_header::from_into_string(struct_name);
